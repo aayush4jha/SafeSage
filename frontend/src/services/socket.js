@@ -6,7 +6,7 @@ let socket = null;
 
 export function connectSocket() {
   if (socket?.connected) return socket;
-  socket = io(BACKEND_URL, {
+  socket = io(BACKEND_URL || 'http://localhost:5001', {
     transports: ['websocket', 'polling'],
     reconnection: true,
     reconnectionDelay: 1000,

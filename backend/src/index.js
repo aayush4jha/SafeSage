@@ -18,15 +18,26 @@ const { analyzeImage } = require('./ai/imageAnalyzer');
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer, {
-  cors: { origin: '*', methods: ['GET', 'POST'] }
-});
+
 
 // Store io instance for routes to access
 app.set('io', io);
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['https://safesage-frontend.vercel.app', 'http://localhost:3001'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
+// Also update Socket.IO cors:
+const io = new Server(httpServer, {
+  cors: {
+    origin: ['https://safesage-frontend.vercel.app', 'http://localhost:3001'],
+    methods: ['GET', 'POST']
+  }
+});
+
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
