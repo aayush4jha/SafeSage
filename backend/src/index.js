@@ -26,7 +26,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: ['https://safesage-frontend.vercel.app', 'http://localhost:3001'],
+    origin: ['https://safesage-frontend.vercel.app', 'http://localhost:3001','http://localhost'],
     methods: ['GET', 'POST']
   }
 });
