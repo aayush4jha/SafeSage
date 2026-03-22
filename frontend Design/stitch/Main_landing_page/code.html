@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SafeSage | Your Digital Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#ba1a1a",
+              "primary-fixed-dim": "#77db9a",
+              "on-error": "#ffffff",
+              "secondary": "#5a5f66",
+              "on-tertiary-fixed-variant": "#474746",
+              "surface": "#f8fafb",
+              "surface-dim": "#d8dadb",
+              "on-secondary-fixed": "#171c22",
+              "on-primary-container": "#ffffff",
+              "tertiary-fixed": "#e5e2e1",
+              "on-background": "#191c1d",
+              "on-secondary": "#ffffff",
+              "tertiary": "#5e5d5d",
+              "on-error-container": "#93000a",
+              "secondary-container": "#dbe0e8",
+              "on-primary": "#ffffff",
+              "tertiary-fixed-dim": "#c8c6c5",
+              "surface-container-low": "#f2f4f5",
+              "on-tertiary-container": "#ffffff",
+              "primary-fixed": "#93f7b4",
+              "background": "#f8fafb",
+              "surface-bright": "#f8fafb",
+              "surface-container-high": "#e6e8e9",
+              "outline-variant": "#becabe",
+              "secondary-fixed": "#dee3eb",
+              "on-secondary-container": "#5e636a",
+              "tertiary-container": "#777676",
+              "surface-container-highest": "#e1e3e4",
+              "on-tertiary-fixed": "#1b1b1c",
+              "primary-container": "#1a874f",
+              "surface-variant": "#e1e3e4",
+              "inverse-surface": "#2e3132",
+              "on-tertiary": "#ffffff",
+              "outline": "#6e7a70",
+              "inverse-primary": "#77db9a",
+              "on-surface": "#191c1d",
+              "inverse-on-surface": "#eff1f2",
+              "on-secondary-fixed-variant": "#42474e",
+              "surface-tint": "#006d3c",
+              "on-primary-fixed": "#00210e",
+              "primary": "#006c3c",
+              "surface-container": "#eceeef",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "on-surface-variant": "#3e4940",
+              "on-primary-fixed-variant": "#00522c",
+              "secondary-fixed-dim": "#c2c7cf"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #006c3c 0%, #1a874f 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 sticky z-50 bg-white/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-8">
+<a class="text-2xl font-bold tracking-tight text-emerald-900" href="#">SafeSage</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-emerald-700 font-semibold border-b-2 border-emerald-700" href="#">Features</a>
+<a class="text-slate-600 hover:text-emerald-900 transition-colors" href="#">SageShield</a>
+<a class="text-slate-600 hover:text-emerald-900 transition-colors" href="#">Trust</a>
+<a class="text-slate-600 hover:text-emerald-900 transition-colors" href="#">Pricing</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-4 py-2 text-emerald-900 font-semibold hover:bg-slate-50 transition-all duration-300 rounded-lg active:scale-95">Login</button>
+<button class="px-6 py-2 bg-primary text-on-primary font-semibold rounded-lg shadow-sm hover:opacity-90 transition-all active:scale-95">Sign Up</button>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative overflow-hidden pt-20 pb-32 px-6">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+<div class="flex-1 text-center md:text-left">
+<span class="inline-block px-4 py-1.5 mb-6 text-label-sm font-bold tracking-widest uppercase bg-secondary-container text-on-secondary-container rounded-full">
+                        Secure Your Future
+                    </span>
+<h1 class="font-headline text-5xl md:text-7xl font-bold text-on-surface leading-[1.1] tracking-tight mb-8">
+                        Your Sanctuary in the <span class="text-primary">Digital Storm.</span>
+</h1>
+<p class="text-xl text-on-surface-variant leading-relaxed mb-10 max-w-2xl">
+                        Experience the peace of mind you deserve. SafeSage provides clinical-grade digital protection wrapped in an elegant, human-centric interface.
+                    </p>
+<div class="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+<button class="px-8 py-4 hero-gradient text-white text-lg font-bold rounded-xl shadow-lg active:scale-95 transition-all">
+                            Join the Sanctuary
+                        </button>
+<button class="px-8 py-4 flex items-center gap-2 text-primary font-bold hover:bg-surface-container-high rounded-xl transition-all">
+<span class="material-symbols-outlined">play_circle</span>
+                            See how it works
+                        </button>
+</div>
+</div>
+<div class="flex-1 relative">
+<div class="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl">
+<img alt="Modern digital shield visualization" class="w-full h-auto object-cover aspect-[4/5] md:aspect-square" data-alt="Futuristic digital shield glowing in dark green emerald space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhND_eboRefX3UkywdQCIvy3Knm-ZwrYVJOXYClfc4SGSVJe2nOlUrZUlStk2AubKeCsSV41BYOV53A4DGdZJgsNSJ15aDjnEZ6MZrBxayjyFFa7zKqFOnvZLYpsoTIWmcIMu_Ku9v2X-dCD91FooUWfoPsb77ulhJgE9_RHX9qCT5aTMd-hmqF1jby08bC7jemySEbearj1uy8rlhfNYsBUwr2GzCEIAVkUutkf2kUGyFKBI1pn9Cj5pyqLV3kC5LXRJqDcDeqHk"/>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -top-12 -right-12 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+<div class="absolute -bottom-12 -left-12 w-64 h-64 bg-primary-container/20 rounded-full blur-3xl -z-10"></div>
+</div>
+</div>
+</section>
+<!-- Social Proof -->
+<section class="py-12 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-6 text-center">
+<p class="text-label-sm font-bold tracking-[0.2em] uppercase text-on-secondary-container mb-8">Trusted by 50,000+ Guardians worldwide</p>
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+<img alt="Partner Logo" class="h-8 md:h-10 w-auto" data-alt="Abstract minimalist company logo in monochrome" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClXO6ValdZqakK2K8pDwD0lrg4ZZBQC1e5Z4nGf-DOI9yPx3BRpxbj3b3VTSlEPpcmOyG9WzC35davjWjZJYhC53u6EQJuJCANPct61iCfmBR0Pdd4_Cxc5xjZC07PMjp-thLexoWzMqiAYS6_BZ7ZvxgOrkhTZ8IyvEZovcDOdg1ZQ3yGUbBXQnieBz1nx9ZBijnItd3WG6Udn-fsBpgGP4H7mHwF7v2D49FsiY67vnF8ufR7Oak6qU23xffAcqv0dAaVu8B5roo"/>
+<img alt="Partner Logo" class="h-8 md:h-10 w-auto" data-alt="Abstract minimalist company logo in monochrome" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiuOM096_bI_9umdU2VEsK9fhggxfUT6ng3fh7mcPr2yk7nQRnddDbOQCmUz6LkaSZPzAKE6pFWQ1ofwSM6BBP4hFnHnBSEqaSd51XrlDyUyUKADY0kkif9JMqErBQeAScxRv6pMwftLWKvNsjZY24OcBz1MRuq3qhQyRxpQWAta3DlRCAlJfilvlW5zbVoxi0wMnY9NgcKidakAWl9py8kKo8XT91wP_EyjOVcYgKgdZu08QyP1VYxv9xH7siWn2W0atDk9FyRUk"/>
+<img alt="Partner Logo" class="h-8 md:h-10 w-auto" data-alt="Abstract minimalist company logo in monochrome" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsZ-qlOHtAU2vGrOf5Q5ZU-mYLiCCaJv4mMKWNWjpDXrnygqUKXkZhpKWV_ehOuxtgBz9KKQIeFou8kWCNR201xEzIvmkLePG9xfbfCVQfNV_OadppduCIE66fJk_jLWvxr8K2uaHldZA9sKu85__RAjm7t95j14tqVVynkqHEqxjbOxdMAPCbSuiGoiwDiuAaK2Wja4_4344tXUDc46WlDh5lZ3-oWxD6qTDAW7ukyMRJ2eVchFSmY9saMtWeFhNnP5ZZRrHNboU"/>
+<img alt="Partner Logo" class="h-8 md:h-10 w-auto" data-alt="Abstract minimalist company logo in monochrome" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwonc2MvNHLaqW6fy0-2lvNo727QMSRLXPJflRe6DZMtEQYOe39-EwTow5oCZQcgU45M4-YA0WtFtmtpCqRhSdVaXyT7JJiVHt0MQXN5uV5z26xbMeGGUNLkUsxkd-wjINRPga2wixK2KjbisIDM5iVCXPQyMPJO07hWYyb_jidnDs0OS0aaymAg3At-mfq1VIF2pR-sWjsvZdxvTsEDlar8Ts8XM3cDUW0WV_YwKe0C-6k8o4Kd4TefTU1ZbIhD_Yilo-7D1aPDY"/>
+</div>
+</div>
+</section>
+<!-- Features Section (Bento Grid) -->
+<section class="py-32 px-6 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+<div>
+<h2 class="font-headline text-4xl md:text-5xl font-bold mb-4">Intelligent Defense. <br/><span class="text-on-surface-variant">Unrivaled Peace.</span></h2>
+</div>
+<p class="max-w-md text-on-surface-variant text-lg">
+                        We've redefined security from the ground up, focusing on proactive measures that stay three steps ahead of any threat.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Feature 1 -->
+<div class="md:col-span-2 bg-surface-container-low rounded-[2rem] p-10 flex flex-col justify-between group">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center text-on-primary mb-8 shadow-md">
+<span class="material-symbols-outlined text-3xl" data-weight="fill">security</span>
+</div>
+<h3 class="font-headline text-3xl font-bold mb-4">Proactive Monitoring</h3>
+<p class="text-on-surface-variant text-lg max-w-lg">
+                                Our sentinel engines scan for vulnerabilities in real-time, neutralizing threats before they even reach your perimeter.
+                            </p>
+</div>
+<div class="mt-12 flex items-center justify-end">
+<img alt="Tech Monitoring Visual" class="rounded-2xl h-48 w-full object-cover" data-alt="Highly detailed computer circuitry glowing with green light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt1ejjPw2qSfkz8RNbJ8P4c6ldJ_zPsHpsC0v1IyFuULljpMWCls5-oe55nYa6qamF9yP6l3yK0mtiTnCwfBRoa1ZAJO2aCKaQEBLCfeGvChq4Ffmb6DtuUhxUctPaUMSJ4YB9mA3oF-HdvYB3VBHbE-AeJgPq49mWRcz5hc8oYueIqbpV9YyKwtSs3GVax1dlXfvJsQg_h1elnpWU4Ff5T9V_t-B7w10374Bg1vphi0JsXxHnCe4wuY5iH9ouxcRCajfni3DMFsk"/>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="bg-primary text-on-primary rounded-[2rem] p-10 flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white mb-8">
+<span class="material-symbols-outlined text-3xl">psychology</span>
+</div>
+<h3 class="font-headline text-3xl font-bold mb-4">Sage Intelligence</h3>
+<p class="text-primary-fixed/80 text-lg">
+                                Adaptive AI that learns your patterns to distinguish between your routine and malicious anomalies.
+                            </p>
+</div>
+<div class="mt-8 pt-8 border-t border-white/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">verified</span>
+<span class="text-sm font-bold uppercase tracking-wider">AI Guard Certified</span>
+</div>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container-high rounded-[2rem] p-10">
+<div class="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-on-secondary mb-8">
+<span class="material-symbols-outlined text-3xl">fingerprint</span>
+</div>
+<h3 class="font-headline text-3xl font-bold mb-4">Secure Identity</h3>
+<p class="text-on-surface-variant text-lg">
+                            Your digital persona, encrypted and unified. Zero-knowledge protocols ensure only you hold the keys.
+                        </p>
+</div>
+<!-- Feature 4 -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-[2rem] p-10 flex flex-col md:flex-row gap-10 items-center border border-outline-variant/10">
+<div class="flex-1">
+<h3 class="font-headline text-3xl font-bold mb-4">SageShield Desktop</h3>
+<p class="text-on-surface-variant text-lg mb-6">
+                                The power of the sanctuary now available on your macOS and Windows devices. Seamless sync, absolute privacy.
+                            </p>
+<button class="text-primary font-bold flex items-center gap-2 group">
+                                Download for Desktop
+                                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="flex-1 w-full">
+<img alt="Desktop Application" class="rounded-xl shadow-xl w-full h-auto" data-alt="Minimalist laptop showing a clean green dashboard interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhTA55DXuFHyf4J3Fy9POHUG8o381OBy0mlXbDA3nGFZnoXufYoS8vWQ7cxLFIDSLntAiEC_PdCKYCRq2T1EsNKg5F2ZrXbi7cmM8OMTytxkSWAItYKugS2jdZrT_ewoPl3nzN2yQvFFyB0dx16EcdCEPZKPqy67rZ07LeGW7e5imPbNiGiS65lnGY1c3kqI8DD9d-d1hfkLAYT2uI86h2TEU9Ija29pHdXJVhFpluQq9-LbG1aaQlRxjnh91PFKcIEypzhcjd11U"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 px-6">
+<div class="max-w-7xl mx-auto">
+<div class="hero-gradient rounded-[3rem] p-12 md:p-24 text-center text-on-primary relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="font-headline text-4xl md:text-6xl font-bold mb-8">Ready to step into the light?</h2>
+<p class="text-xl md:text-2xl text-primary-fixed max-w-2xl mx-auto mb-12">
+                            Join over 50,000 users who have found their digital sanctuary with SafeSage.
+                        </p>
+<button class="px-12 py-5 bg-white text-primary text-xl font-extrabold rounded-2xl shadow-xl hover:bg-surface-container-lowest transition-all active:scale-95">
+                            Join the Sanctuary
+                        </button>
+</div>
+<!-- Decorative patterns -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="absolute top-0 right-0 w-96 h-96 border-[40px] border-white rounded-full translate-x-1/2 -translate-y-1/2"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 border-[20px] border-white rounded-full -translate-x-1/2 translate-y-1/2"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 py-12 px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="text-lg font-bold text-emerald-900 mb-4">SafeSage</div>
+<p class="text-slate-500 text-sm leading-relaxed mb-6">
+                    Crafting digital peace of mind through advanced intelligence and human-centric design.
+                </p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors">public</span>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors">shield_with_heart</span>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors">hub</span>
+</div>
+</div>
+<div>
+<h4 class="text-label-sm font-bold text-emerald-800 uppercase tracking-widest mb-6">Product</h4>
+<ul class="space-y-3">
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors text-sm" href="#">Features</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors text-sm" href="#">SageShield</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors text-sm" href="#">Pricing</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors text-sm" href="#">Security Audit</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-label-sm font-bold text-emerald-800 uppercase tracking-widest mb-6">Company</h4>
+<ul class="space-y-3">
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors text-sm" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors text-sm" href="#">Terms of Service</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors text-sm" href="#">Trust Center</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors text-sm" href="#">Contact Support</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-label-sm font-bold text-emerald-800 uppercase tracking-widest mb-6">Status</h4>
+<div class="bg-surface-container-high rounded-xl p-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+<span class="text-xs font-bold text-on-surface">ALL SYSTEMS OPERATIONAL</span>
+</div>
+<p class="text-[10px] text-slate-500 uppercase tracking-tight">Last verified: 2 mins ago</p>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-slate-200">
+<p class="text-slate-500 text-xs text-center">© 2024 SafeSage Digital Sanctuary. All rights reserved.</p>
+</div>
+</footer>
+</body></html>

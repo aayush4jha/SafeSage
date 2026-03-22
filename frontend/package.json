@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cap:sync": "capacitor sync",
+    "cap:open": "capacitor open android",
+    "android": "vite build && capacitor sync android && capacitor open android"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.2",
@@ -19,6 +22,11 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@capacitor/android": "^8.2.0",
+    "@capacitor/camera": "^8.0.2",
+    "@capacitor/cli": "^8.2.0",
+    "@capacitor/core": "^8.2.0",
+    "@capacitor/geolocation": "^8.1.0",
     "@headlessui/react": "^2.2.9",
     "axios": "^1.13.6",
     "framer-motion": "^12.38.0",
