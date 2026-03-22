@@ -14,7 +14,11 @@ const emergencyRoutes = require('./routes/emergencyRoutes');
 const userRoutes = require('./routes/userRoutes');
 const familyRoutes = require('./routes/familyRoutes');
 const codewordRoutes = require('./routes/codewordRoutes');
+const rewardsRoutes = require('./routes/rewardsRoutes');
 const { analyzeImage } = require('./ai/imageAnalyzer');
+const { generateChallenges } = require('./jobs/challengeGenerator');
+const { generateBountiesJob } = require('./jobs/bountyGenerator');
+const { setIO } = require('./ai/rewardsEngine');
 
 const app = express();
 const httpServer = createServer(app);
@@ -26,8 +30,9 @@ const io = new Server(httpServer, {
     methods: ['GET', 'POST']
   }
 });
-// Store io instance for routes to access
+// Store io instance for routes and rewards engine to access
 app.set('io', io);
+setIO(io);
 
 // Middleware
 app.use(cors({
@@ -56,6 +61,7 @@ app.use('/api/emergency', emergencyRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/family', familyRoutes);
 app.use('/api/codeword', codewordRoutes);
+app.use('/api/rewards', rewardsRoutes);
 
 // Image upload and analysis endpoint
 app.post('/api/reports/verify-image', express.raw({ type: ['image/*'], limit: '10mb' }), async (req, res) => {
@@ -92,7 +98,7 @@ app.get('/api/health', (req, res) => {
     status: 'ok',
     service: 'NightShield AI Backend',
     version: '2.0',
-    features: ['safety-heatmap', 'safe-routes', 'emergency-sos', 'family-network', 'voice-guardian', 'codeword-system', 'image-verification', 'escalation-engine'],
+    features: ['safety-heatmap', 'safe-routes', 'emergency-sos', 'family-network', 'voice-guardian', 'codeword-system', 'image-verification', 'escalation-engine', 'rewards-system'],
     timestamp: new Date().toISOString()
   });
 });
@@ -158,6 +164,12 @@ io.on('connection', (socket) => {
     });
   });
 
+  // Rewards notification room
+  socket.on('join-rewards', (data) => {
+    const room = `rewards-${data.userId || socket.id}`;
+    socket.join(room);
+  });
+
   socket.on('disconnect', () => {
     console.log(`Client disconnected: ${socket.id}`);
   });
@@ -176,6 +188,25 @@ function getLocalIP() {
   return 'localhost';
 }
 
+// ============================================================
+// Scheduled Jobs — Challenges & Bounties
+// ============================================================
+function startScheduledJobs() {
+  // Generate challenges on startup, then every 1 hour
+  generateChallenges().catch(e => console.error('[Scheduler] Challenge init error:', e.message));
+  setInterval(() => {
+    generateChallenges().catch(e => console.error('[Scheduler] Challenge error:', e.message));
+  }, 60 * 60 * 1000); // every 1 hour
+
+  // Generate bounties on startup, then every 2 hours
+  generateBountiesJob().catch(e => console.error('[Scheduler] Bounty init error:', e.message));
+  setInterval(() => {
+    generateBountiesJob().catch(e => console.error('[Scheduler] Bounty error:', e.message));
+  }, 2 * 60 * 60 * 1000); // every 2 hours
+
+  console.log('  Scheduled: Challenges (1h) | Bounties (2h)');
+}
+
 connectDB()
   .then(() => {
     httpServer.listen(PORT, '0.0.0.0', () => {
@@ -183,7 +214,9 @@ connectDB()
       console.log(`\n  NightShield AI Backend v2.0`);
       console.log(`  Local:   http://localhost:${PORT}/api`);
       console.log(`  Network: http://${ip}:${PORT}/api`);
-      console.log(`  Health:  http://localhost:${PORT}/api/health\n`);
+      console.log(`  Health:  http://localhost:${PORT}/api/health`);
+      startScheduledJobs();
+      console.log('');
     });
   })
   .catch((err) => {

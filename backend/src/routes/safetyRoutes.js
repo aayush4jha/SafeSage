@@ -3,6 +3,7 @@ const router = express.Router();
 const { supabase } = require('../config/db');
 const { calculateRoadSafetyScore, generateHeatmapData, predictDangerZones } = require('../ai/safetyScoreEngine');
 const { optionalAuth } = require('../middleware/auth');
+const { onReportSubmitted, onReportUpvoted } = require('../ai/rewardsEngine');
 
 function getTimeOfDayFromHour(hour) {
   if (hour >= 0 && hour < 5) return 'late_night';
@@ -57,6 +58,12 @@ router.post('/reports', optionalAuth, async (req, res) => {
       .insert(insertData).select().single();
 
     if (error) throw error;
+
+    // Award credits for report submission
+    if (req.userId && data) {
+      onReportSubmitted(req.userId, data.id, data.verified).catch(() => {});
+    }
+
     res.status(201).json({ message: 'Report submitted successfully', report: data });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -106,7 +113,7 @@ router.get('/reports', async (req, res) => {
 // POST /api/reports/:id/upvote
 router.post('/reports/:id/upvote', async (req, res) => {
   try {
-    const { data: existing } = await supabase.from('safety_reports').select('upvotes').eq('id', req.params.id).single();
+    const { data: existing } = await supabase.from('safety_reports').select('upvotes, user_id').eq('id', req.params.id).single();
     if (!existing) return res.status(404).json({ error: 'Report not found' });
 
     const { data, error } = await supabase.from('safety_reports')
@@ -115,6 +122,12 @@ router.post('/reports/:id/upvote', async (req, res) => {
       .select().single();
 
     if (error) throw error;
+
+    // Award credits to the report author
+    if (existing.user_id) {
+      onReportUpvoted(existing.user_id, req.params.id).catch(() => {});
+    }
+
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: error.message });

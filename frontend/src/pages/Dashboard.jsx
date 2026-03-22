@@ -3,7 +3,7 @@ import TopNavBar from '../components/TopNavBar'
 import { useSafety } from '../context/SafetyContext'
 import { useAuth } from '../context/AuthContext'
 import { useCache } from '../context/CacheContext'
-import { fetchReports, fetchDangerPredictions, fetchDashboardScores } from '../services/api'
+import { fetchReports, fetchDangerPredictions, fetchDashboardScores, fetchRewardsProfile } from '../services/api'
 import { formatTimestamp } from '../utils/helpers'
 
 export default function Dashboard() {
@@ -15,6 +15,7 @@ export default function Dashboard() {
   const [cityScore, setCityScore] = useState(() => get('dashboard_cityScore') ?? null)
   const [personalScore, setPersonalScore] = useState(() => get('dashboard_personalScore') ?? null)
   const [cityName, setCityName] = useState(() => get('dashboard_cityName') || 'City')
+  const [rewards, setRewards] = useState(() => get('dashboard_rewards') || null)
   const lastLocationRef = useRef(null)
 
   // Reverse geocode to get city name
@@ -70,6 +71,12 @@ export default function Dashboard() {
   }, [userLocation, get, set])
 
   useEffect(() => { loadData() }, [loadData])
+
+  useEffect(() => {
+    if (!get('dashboard_rewards')) {
+      fetchRewardsProfile().then(d => { setRewards(d); set('dashboard_rewards', d) }).catch(() => {})
+    }
+  }, [get, set])
 
   const cScore = cityScore ?? 50
   const pScore = personalScore ?? 72
@@ -199,6 +206,34 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Rewards Quick Access */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+          <a href="/rewards" className="md:col-span-2 bg-surface-container-lowest p-5 md:p-6 rounded-2xl md:rounded-3xl shadow-sm border border-outline-variant/5 flex items-center gap-4 hover:bg-surface-container-low transition-colors no-underline">
+            <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-primary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>{rewards?.tierIcon || 'military_tech'}</span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs text-on-surface-variant font-bold uppercase tracking-wider">{rewards?.tierLabel || 'Scout'} &middot; {rewards?.currentStreak || 0}d streak</p>
+              <p className="text-2xl font-extrabold text-on-surface">{rewards?.credits ?? 0} <span className="text-sm font-medium text-on-surface-variant">credits</span></p>
+            </div>
+            <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+          </a>
+          <a href="/leaderboard" className="bg-surface-container-lowest p-5 md:p-6 rounded-2xl md:rounded-3xl shadow-sm border border-outline-variant/5 flex items-center gap-3 hover:bg-surface-container-low transition-colors no-underline">
+            <span className="material-symbols-outlined text-primary text-xl">leaderboard</span>
+            <div>
+              <p className="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Leaderboard</p>
+              <p className="text-sm font-bold text-on-surface">Top Contributors</p>
+            </div>
+          </a>
+          <a href="/bounties" className="bg-surface-container-lowest p-5 md:p-6 rounded-2xl md:rounded-3xl shadow-sm border border-outline-variant/5 flex items-center gap-3 hover:bg-surface-container-low transition-colors no-underline">
+            <span className="material-symbols-outlined text-primary text-xl">explore</span>
+            <div>
+              <p className="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Bounties</p>
+              <p className="text-sm font-bold text-on-surface">Earn Bonus Credits</p>
+            </div>
+          </a>
         </div>
 
         {/* Recent Reports */}

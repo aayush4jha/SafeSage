@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom'
 const navItems = [
   { path: '/', label: 'Home', icon: 'dashboard' },
   { path: '/map', label: 'Map', icon: 'map' },
-  { path: '/family', label: 'Family', icon: 'group' },
+  { path: '/rewards', label: 'Rewards', icon: 'military_tech', matchPaths: ['/rewards', '/leaderboard', '/bounties', '/zones', '/plans'] },
   { path: '/profile', label: 'Settings', icon: 'settings' },
 ]
 
@@ -28,7 +28,9 @@ export default function BottomNav() {
         </Link>
       </div>
       {navItems.slice(2).map(item => {
-        const isActive = location.pathname === item.path
+        const isActive = item.matchPaths
+          ? item.matchPaths.includes(location.pathname)
+          : location.pathname === item.path
         return (
           <Link key={item.path} to={item.path} className={`flex flex-col items-center gap-1 ${isActive ? 'text-emerald-600' : 'text-slate-400'}`}>
             <span className="material-symbols-outlined" style={isActive ? { fontVariationSettings: "'FILL' 1" } : undefined}>{item.icon}</span>

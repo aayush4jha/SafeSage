@@ -3,7 +3,7 @@ import TopNavBar from '../components/TopNavBar'
 import { useSafety } from '../context/SafetyContext'
 import { useAuth } from '../context/AuthContext'
 import { useCache } from '../context/CacheContext'
-import { fetchUserStats, fetchEmergencyHistory } from '../services/api'
+import { fetchUserStats, fetchEmergencyHistory, fetchRewardsProfile } from '../services/api'
 import { formatTimestamp } from '../utils/helpers'
 
 export default function ProfilePage() {
@@ -12,6 +12,7 @@ export default function ProfilePage() {
   const { get, set } = useCache()
   const [stats, setStats] = useState(() => get('profile_stats') || null)
   const [history, setHistory] = useState(() => get('profile_history') || [])
+  const [rewards, setRewards] = useState(() => get('profile_rewards') || null)
 
   useEffect(() => {
     if (!get('profile_stats')) {
@@ -21,6 +22,9 @@ export default function ProfilePage() {
       fetchEmergencyHistory().then(d => {
         if (Array.isArray(d)) { const sliced = d.slice(0, 3); setHistory(sliced); set('profile_history', sliced) }
       }).catch(() => {})
+    }
+    if (!get('profile_rewards')) {
+      fetchRewardsProfile().then(d => { setRewards(d); set('profile_rewards', d) }).catch(() => {})
     }
   }, [get, set])
 
@@ -48,7 +52,7 @@ export default function ProfilePage() {
             <div className="min-w-0">
               <div className="flex items-center gap-2 md:gap-3 mb-1 flex-wrap">
                 <h1 className="text-xl md:text-4xl font-extrabold tracking-tight text-on-surface truncate">{user?.name || 'User'}</h1>
-                <span className="px-2 md:px-3 py-0.5 md:py-1 bg-primary-fixed text-on-primary-fixed-variant text-[9px] md:text-[10px] font-bold uppercase tracking-widest rounded-full">Guardian</span>
+                <span className="px-2 md:px-3 py-0.5 md:py-1 bg-primary-fixed text-on-primary-fixed-variant text-[9px] md:text-[10px] font-bold uppercase tracking-widest rounded-full">{rewards?.tierLabel || 'Scout'}</span>
               </div>
               <p className="text-on-surface-variant font-medium flex items-center gap-2 text-xs md:text-sm truncate">
                 <span className="material-symbols-outlined text-sm">mail</span>
@@ -182,6 +186,23 @@ export default function ProfilePage() {
                 </div>
               )}
             </div>
+
+            {/* Rewards Summary */}
+            <a href="/rewards" className="block bg-linear-to-br from-primary to-primary-container p-5 md:p-6 rounded-2xl md:rounded-4xl text-white relative overflow-hidden group">
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>{rewards?.tierIcon || 'explore'}</span>
+                  <h4 className="font-bold">{rewards?.tierLabel || 'Scout'}</h4>
+                </div>
+                <p className="text-3xl font-extrabold">{rewards?.credits ?? 0} <span className="text-sm font-medium opacity-80">credits</span></p>
+                <div className="flex items-center gap-3 mt-2 text-xs opacity-80">
+                  <span>{rewards?.currentStreak ?? 0}d streak</span>
+                  <span>{rewards?.tierMultiplier ?? 1}x multiplier</span>
+                </div>
+                <p className="text-xs mt-3 font-semibold opacity-90">View Rewards &rarr;</p>
+              </div>
+              <span className="material-symbols-outlined absolute -bottom-4 -right-4 text-9xl opacity-10 group-hover:scale-110 transition-transform duration-500">military_tech</span>
+            </a>
 
             {/* Support */}
             <div className="bg-surface-container-highest p-6 md:p-8 rounded-2xl md:rounded-4xl relative overflow-hidden group">

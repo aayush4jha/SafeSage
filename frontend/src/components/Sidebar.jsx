@@ -5,8 +5,19 @@ const navItems = [
   { path: '/map', label: 'Safety Map', icon: 'map' },
   { path: '/family', label: 'Safety Circles', icon: 'group' },
   { path: '/emergency', label: 'Guardian Mode', icon: 'shield_with_heart' },
+  {
+    path: '/rewards', label: 'Rewards', icon: 'military_tech',
+    children: [
+      { path: '/leaderboard', label: 'Leaderboard', icon: 'leaderboard' },
+      { path: '/bounties', label: 'Bounties', icon: 'explore' },
+      { path: '/zones', label: 'My Zones', icon: 'location_on' },
+      { path: '/plans', label: 'Plans', icon: 'workspace_premium' },
+    ]
+  },
   { path: '/profile', label: 'Settings', icon: 'settings' },
 ]
+
+const rewardPaths = ['/rewards', '/leaderboard', '/bounties', '/zones', '/plans']
 
 export default function Sidebar() {
   const location = useLocation()
@@ -25,28 +36,66 @@ export default function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 space-y-1">
+      <nav className="flex-1 space-y-1 overflow-y-auto">
         {navItems.map(item => {
           const isActive = location.pathname === item.path ||
-            (item.path === '/map' && location.pathname === '/report')
+            (item.path === '/map' && location.pathname === '/report') ||
+            (item.path === '/rewards' && rewardPaths.includes(location.pathname))
+
+          const showChildren = item.children && rewardPaths.includes(location.pathname)
+
           return (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`flex items-center gap-3 px-4 py-3 transition-colors duration-200 rounded-xl ${
-                isActive
-                  ? 'text-emerald-700 font-semibold bg-emerald-50'
-                  : 'text-slate-500 hover:text-slate-900 hover:bg-slate-200/50'
-              }`}
-            >
-              <span
-                className="material-symbols-outlined"
-                style={isActive ? { fontVariationSettings: "'FILL' 1" } : undefined}
+            <div key={item.path}>
+              <Link
+                to={item.path}
+                className={`flex items-center gap-3 px-4 py-3 transition-colors duration-200 rounded-xl ${
+                  isActive
+                    ? 'text-emerald-700 font-semibold bg-emerald-50'
+                    : 'text-slate-500 hover:text-slate-900 hover:bg-slate-200/50'
+                }`}
               >
-                {item.icon}
-              </span>
-              <span className="font-body text-sm">{item.label}</span>
-            </Link>
+                <span
+                  className="material-symbols-outlined"
+                  style={isActive ? { fontVariationSettings: "'FILL' 1" } : undefined}
+                >
+                  {item.icon}
+                </span>
+                <span className="font-body text-sm">{item.label}</span>
+                {item.children && (
+                  <span className={`material-symbols-outlined text-sm ml-auto transition-transform ${showChildren ? 'rotate-180' : ''}`}>
+                    expand_more
+                  </span>
+                )}
+              </Link>
+
+              {/* Sub-navigation */}
+              {showChildren && (
+                <div className="ml-4 mt-1 space-y-0.5 border-l-2 border-emerald-100 pl-3">
+                  {item.children.map(child => {
+                    const isChildActive = location.pathname === child.path
+                    return (
+                      <Link
+                        key={child.path}
+                        to={child.path}
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors duration-200 ${
+                          isChildActive
+                            ? 'text-emerald-700 font-semibold bg-emerald-50/70'
+                            : 'text-slate-400 hover:text-slate-700 hover:bg-slate-100'
+                        }`}
+                      >
+                        <span
+                          className="material-symbols-outlined text-[18px]"
+                          style={isChildActive ? { fontVariationSettings: "'FILL' 1" } : undefined}
+                        >
+                          {child.icon}
+                        </span>
+                        <span className="font-body text-[13px]">{child.label}</span>
+                      </Link>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
           )
         })}
       </nav>

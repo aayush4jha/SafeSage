@@ -47,3 +47,12 @@ export function joinFamilyRooms(networkIds) {
     socket.emit('join-family-network', { networkId: id });
   });
 }
+
+export function joinRewardsRoom(userId) {
+  socket?.emit('join-rewards', { userId });
+}
+
+export function onRewardEarned(callback) {
+  socket?.on('reward-earned', callback);
+  return () => socket?.off('reward-earned', callback);
+}

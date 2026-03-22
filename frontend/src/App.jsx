@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar'
 import EmergencyNotification from './components/EmergencyNotification'
 import GuardianAlert from './components/GuardianAlert'
 import BottomNav from './components/BottomNav'
+import RewardToast from './components/RewardToast'
 import Dashboard from './pages/Dashboard'
 import ReportPage from './pages/ReportPage'
 import EmergencyPage from './pages/EmergencyPage'
@@ -13,6 +14,11 @@ import ProfilePage from './pages/ProfilePage'
 import FamilyDashboard from './pages/FamilyDashboard'
 import SafetyMapPage from './pages/SafetyMapPage'
 import AuthPage from './pages/AuthPage'
+import RewardsPage from './pages/RewardsPage'
+import LeaderboardPage from './pages/LeaderboardPage'
+import BountiesPage from './pages/BountiesPage'
+import AdoptZonePage from './pages/AdoptZonePage'
+import PlansPage from './pages/PlansPage'
 
 function ProtectedRoutes() {
   const { isAuthenticated, loading } = useAuth()
@@ -37,6 +43,7 @@ function ProtectedRoutes() {
       <SafetyProvider>
         <EmergencyNotification />
         <GuardianAlert />
+        <RewardToast />
         <div className="flex h-screen overflow-hidden">
           <Sidebar />
           <div className="flex-1 md:ml-64 flex flex-col overflow-hidden">
@@ -48,6 +55,11 @@ function ProtectedRoutes() {
                 <Route path="/family" element={<FamilyDashboard />} />
                 <Route path="/emergency" element={<EmergencyPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/rewards" element={<RewardsPage />} />
+                <Route path="/leaderboard" element={<LeaderboardPage />} />
+                <Route path="/bounties" element={<BountiesPage />} />
+                <Route path="/zones" element={<AdoptZonePage />} />
+                <Route path="/plans" element={<PlansPage />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </div>

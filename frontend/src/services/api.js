@@ -125,4 +125,56 @@ export const checkRouteSafety = (waypoints) =>
 export const fetchZoneAtPoint = (lng, lat) =>
   api.get('/zone-at-point', { params: { lng, lat } }).then(r => r.data);
 
+// Rewards System APIs
+export const fetchRewardsProfile = () =>
+  api.get('/rewards/profile').then(r => r.data);
+
+export const fetchImpactStats = () =>
+  api.get('/rewards/impact').then(r => r.data);
+
+export const fetchCreditTransactions = (limit = 20, offset = 0) =>
+  api.get('/rewards/transactions', { params: { limit, offset } }).then(r => r.data);
+
+export const fetchWeeklyChallenges = () =>
+  api.get('/rewards/challenges').then(r => r.data);
+
+export const fetchBounties = (lat, lng, radius = 10) =>
+  api.get('/rewards/bounties', { params: { lat, lng, radius } }).then(r => r.data);
+
+export const claimBounty = (bountyId) =>
+  api.post(`/rewards/bounties/${encodeURIComponent(bountyId)}/claim`).then(r => r.data);
+
+export const completeBounty = (bountyId, reportId) =>
+  api.post(`/rewards/bounties/${encodeURIComponent(bountyId)}/complete`, { reportId }).then(r => r.data);
+
+export const fetchLeaderboard = (period = 'monthly', scope = 'global', limit = 20) =>
+  api.get('/rewards/leaderboard', { params: { period, scope, limit } }).then(r => r.data);
+
+export const fetchAdoptedZones = () =>
+  api.get('/rewards/zones').then(r => r.data);
+
+export const adoptZone = (zoneName, latitude, longitude, radiusMeters = 500) =>
+  api.post('/rewards/zones/adopt', { zoneName, latitude, longitude, radiusMeters }).then(r => r.data);
+
+export const deactivateZone = (zoneId) =>
+  api.delete(`/rewards/zones/${encodeURIComponent(zoneId)}`).then(r => r.data);
+
+export const redeemCredits = (amount, redeemType = 'general') =>
+  api.post('/rewards/redeem', { amount, redeemType }).then(r => r.data);
+
+export const applyReferralCode = (referralCode) =>
+  api.post('/rewards/apply-referral', { referralCode }).then(r => r.data);
+
+export const fetchTierDefinitions = () =>
+  api.get('/rewards/tiers').then(r => r.data);
+
+export const fetchRewardsStore = () =>
+  api.get('/rewards/store').then(r => r.data);
+
+export const redeemStoreItem = (itemId, itemName, cost) =>
+  api.post('/rewards/store/redeem', { itemId, itemName, cost }).then(r => r.data);
+
+export const fetchRewardNotifications = () =>
+  api.get('/rewards/notifications').then(r => r.data);
+
 export default api;
