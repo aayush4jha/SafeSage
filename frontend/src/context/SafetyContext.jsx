@@ -92,7 +92,7 @@ export function SafetyProvider({ children }) {
         setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude })
       },
       () => setUserLocation(DEFAULT_LOCATION),
-      { enableHighAccuracy: true }
+      { enableHighAccuracy: true, maximumAge: 0 }
     )
 
     const id = navigator.geolocation.watchPosition(
@@ -103,6 +103,8 @@ export function SafetyProvider({ children }) {
           accuracy: pos.coords.accuracy,
           timestamp: pos.timestamp,
         }
+        // Only update if accuracy is reasonable (< 100m), otherwise wait for better fix
+        if (loc.accuracy && loc.accuracy > 100) return
         setUserLocation({ lat: loc.lat, lng: loc.lng })
         setLocationHistory(prev => [...prev.slice(-49), loc])
         setIsTracking(true)
@@ -111,7 +113,7 @@ export function SafetyProvider({ children }) {
       (err) => {
         setLocationError(err.message)
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 5000 }
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
     )
     watchIdRef.current = id
 

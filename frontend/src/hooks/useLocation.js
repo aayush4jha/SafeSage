@@ -18,6 +18,8 @@ export default function useLocation() {
     watchIdRef.current = navigator.geolocation.watchPosition(
       (position) => {
         const { latitude, longitude, accuracy } = position.coords
+        // Skip low-accuracy readings (> 100m off)
+        if (accuracy && accuracy > 100) return
         const newLocation = { lat: latitude, lng: longitude, accuracy, timestamp: position.timestamp }
         setLocation(newLocation)
         setError(null)
@@ -26,7 +28,7 @@ export default function useLocation() {
       (err) => {
         setError(err.message)
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 5000 }
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
     )
   }, [])
 
