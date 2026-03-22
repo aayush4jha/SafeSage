@@ -4,10 +4,10 @@
   "main": "src/index.js",
   "private": true,
   "scripts": {
-    "dev": "bun --watch src/index.js",
-    "start": "bun src/index.js",
-    "seed": "bun src/utils/seedData.js",
-    "seed:zones": "bun src/utils/seedSafetyZones.js"
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "seed": "node src/utils/seedData.js",
+    "seed:zones": "node src/utils/seedSafetyZones.js"
   },
   "devDependencies": {
     "@types/bun": "latest"
