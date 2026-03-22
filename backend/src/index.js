@@ -26,7 +26,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: ['https://safesage-frontend.vercel.app', 'http://localhost:3001','http://localhost'],
+    origin: '*',
     methods: ['GET', 'POST']
   }
 });
@@ -36,9 +36,9 @@ setIO(io);
 
 // Middleware
 app.use(cors({
-  origin: ['https://safesage-frontend.vercel.app', 'http://localhost:3001', "http://localhost"],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 // Also update Socket.IO cors:
