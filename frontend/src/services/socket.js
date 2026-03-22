@@ -1,11 +1,12 @@
 import { io } from 'socket.io-client';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || window.location.origin;
+
 let socket = null;
 
 export function connectSocket() {
   if (socket?.connected) return socket;
-  // Connect through Vite proxy (works on LAN too)
-  socket = io(window.location.origin, {
+  socket = io(BACKEND_URL, {
     transports: ['websocket', 'polling'],
     reconnection: true,
     reconnectionDelay: 1000,
