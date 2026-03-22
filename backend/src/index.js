@@ -20,23 +20,23 @@ const app = express();
 const httpServer = createServer(app);
 
 
-// Store io instance for routes to access
-app.set('io', io);
-
-// Middleware
-app.use(cors({
-  origin: ['https://safesage-frontend.vercel.app', 'http://localhost:3001'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
-
-// Also update Socket.IO cors:
 const io = new Server(httpServer, {
   cors: {
     origin: ['https://safesage-frontend.vercel.app', 'http://localhost:3001'],
     methods: ['GET', 'POST']
   }
 });
+// Store io instance for routes to access
+app.set('io', io);
+
+// Middleware
+app.use(cors({
+  origin: ['https://safesage-frontend.vercel.app/', 'http://localhost:3001'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
+// Also update Socket.IO cors:
 
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(morgan('dev'));
