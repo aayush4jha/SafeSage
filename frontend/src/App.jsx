@@ -19,8 +19,6 @@ import LeaderboardPage from './pages/LeaderboardPage'
 import BountiesPage from './pages/BountiesPage'
 import AdoptZonePage from './pages/AdoptZonePage'
 import PlansPage from './pages/PlansPage'
-import PermissionsPage, { hasGrantedPermissions } from './pages/PermissionsPage'
-import { Capacitor } from '@capacitor/core'
 
 function ProtectedRoutes() {
   const { isAuthenticated, loading } = useAuth()
@@ -81,14 +79,11 @@ function AuthRoute() {
 }
 
 export default function App() {
-  const needsPermissions = Capacitor.isNativePlatform() && !hasGrantedPermissions()
-
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/permissions" element={<PermissionsPage />} />
-        <Route path="/auth" element={needsPermissions ? <PermissionsPage /> : <AuthRoute />} />
-        <Route path="/*" element={needsPermissions ? <PermissionsPage /> : <ProtectedRoutes />} />
+        <Route path="/auth" element={<AuthRoute />} />
+        <Route path="/*" element={<ProtectedRoutes />} />
       </Routes>
     </AuthProvider>
   )

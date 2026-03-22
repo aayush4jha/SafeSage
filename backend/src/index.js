@@ -36,7 +36,7 @@ setIO(io);
 
 // Middleware
 app.use(cors({
-  origin: ['https://safesage-frontend.vercel.app', 'http://localhost:3001'],
+  origin: ['https://safesage-frontend.vercel.app', 'http://localhost:3001', "http://localhost"],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
