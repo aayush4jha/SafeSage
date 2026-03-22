@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SafeSage - Safety Circles</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-container": "#f7fff2",
+                        "on-primary-fixed": "#002109",
+                        "outline": "#6e7b6c",
+                        "on-background": "#191c1d",
+                        "surface-dim": "#d9dadb",
+                        "primary-fixed": "#7ffc97",
+                        "on-surface": "#191c1d",
+                        "secondary": "#565e74",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e1e3e4",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed-dim": "#62df7d",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "primary": "#006b2c",
+                        "tertiary-fixed": "#ffddb8",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "secondary-fixed": "#dae2fd",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#00873a",
+                        "on-secondary": "#ffffff",
+                        "background": "#f8f9fa",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#3e4a3d",
+                        "tertiary-container": "#a36700",
+                        "inverse-primary": "#62df7d",
+                        "surface": "#f8f9fa",
+                        "on-tertiary-container": "#fffbff",
+                        "tertiary": "#825100",
+                        "secondary-container": "#dae2fd",
+                        "on-secondary-container": "#5c647a",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#bdcaba",
+                        "surface-tint": "#006e2d",
+                        "on-secondary-fixed": "#131b2e",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-container": "#edeeef",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "surface-container-highest": "#e1e3e4",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#005320",
+                        "on-tertiary-fixed-variant": "#653e00"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-4 bg-slate-50 dark:bg-slate-900 h-screen w-64 border-r-0 z-50">
+<div class="mb-8 px-4">
+<h1 class="text-xl font-bold text-slate-900 dark:text-white">SafeSage</h1>
+<p class="text-xs text-on-surface-variant font-medium opacity-70">The Digital Guardian</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200/50 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label text-sm">Home</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200/50 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label text-sm">Safety Map</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-emerald-700 dark:text-emerald-400 font-semibold bg-emerald-50 dark:bg-emerald-900/20 rounded-xl" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label text-sm">Safety Circles</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200/50 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">shield_with_heart</span>
+<span class="font-label text-sm">Guardian Mode</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200/50 dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label text-sm">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-4 bg-slate-100 dark:bg-slate-800/50 rounded-2xl">
+<button class="w-full bg-primary hover:bg-primary-container text-white py-2.5 rounded-xl font-semibold text-sm transition-all active:scale-95">
+                Start Audit
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen flex flex-col relative overflow-hidden bg-surface-container-low">
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center h-16 px-8 sticky top-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<h2 class="font-headline text-lg font-black tracking-tight text-slate-900 dark:text-white">All Members Safe</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-xs font-bold">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                    LIVE PROTECTION ACTIVE
+                </div>
+<button class="hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full p-2 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<img alt="User Profile" class="w-8 h-8 rounded-full border-2 border-white shadow-sm" data-alt="User profile avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgmuFUX4XN3sDpVFNaiB5wkGd7CGgehf1Yws0tcyBDB0ANHfYDcPifetu1vcbyU21ZztdjDBEBWhCZlHRrAVQ4AzYGJhXS1i1mHX1oXRafTJ123BxsJ1K0-P94iZOEdzYqalX_cKn5RW9fCDY5PdxMbSePOnHThRJG_B--p2lpDwh3VdYznPEvoh0XWW_uaOPoq41PKp15f9-qctJ3lxb2OHueW505ssNpk8tTW9dsmOXO1P-UD60z6T_f1xggkboeRXq2sdeI22mP"/>
+</div>
+</header>
+<!-- Dynamic Content Canvas -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left Panel: Family List -->
+<section class="w-80 bg-surface-container-lowest border-r-0 shadow-sm z-10 flex flex-col">
+<div class="p-6 border-b border-outline-variant/10">
+<h3 class="font-headline text-xl font-bold mb-1">Safety Circles</h3>
+<p class="text-xs text-on-surface-variant">4 members currently active</p>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-3">
+<!-- Member Item 1 -->
+<div class="group p-3 rounded-2xl hover:bg-surface-container-low transition-all cursor-pointer border border-transparent hover:border-outline-variant/20">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Sarah" class="w-12 h-12 rounded-2xl object-cover" data-alt="Portrait of a young woman smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI6blpAHmGbp1yxqM9VIiavORegFhP8vyUomqNwRImGxqh7vb80A-M_JoRiTLUp7Cto-14A2oNCGsPm-J5H7Bmm5G0k3MC-gFgZYyvq6Lz7p-JdmkVfouKsjG2RD2UidLGyhjn3_Ew3TnBFZLnPoNkdArs7fkHO7cgBqxJ-q--1U0oS2c8V68ycUehOsphqXSiqFAnk8FcT0pt8KNnPJqSdbSm-lfdyoKQ_XZx54iRh6hX3C4aguWxzlsJ6xvgz2y-OE_2Nhid3aPQ"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-primary border-2 border-white rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm text-on-surface">Sarah Mitchell</h4>
+<span class="text-[10px] font-bold text-primary">SAFE</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">At Central Library</p>
+<div class="flex items-center gap-3 mt-1.5">
+<div class="flex items-center gap-1 text-[10px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">battery_full</span> 84%
+                                    </div>
+<div class="flex items-center gap-1 text-[10px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 2m ago
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Member Item 2 -->
+<div class="group p-3 rounded-2xl bg-surface-container-low border border-primary/10 transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Leo" class="w-12 h-12 rounded-2xl object-cover" data-alt="Portrait of a teenage boy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPUD4BeqPBDr2gL3AQt00UO-cr-vNv6vItTrnyX8w4jMEqiS0RU0pmTAbbNgYq9SZL8PhgMk-zP5rNpP_wzsWGA68tTH-yuKlh9bIBticNSVwqYcbzSs1iVX5idBhBdfbxAWU27vPFoNChunEbzw8rjVmLjk60lo0G3a-s7lE67AQj_nDIZDhJJQgIG9jd7dyou1wlTB1CB6TKI26bwXMzk40DE0BZl86KiK5jjJwi5x0bm4EMByOQ9KtwUTtPryYjWyryJqnkQxoX"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-primary border-2 border-white rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm text-on-surface">Leo Mitchell</h4>
+<span class="text-[10px] font-bold text-tertiary">MOVING</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Heading to Soccer Practice</p>
+<div class="flex items-center gap-3 mt-1.5">
+<div class="flex items-center gap-1 text-[10px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">battery_3_bar</span> 42%
+                                    </div>
+<div class="flex items-center gap-1 text-[10px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">near_me</span> 12 mph
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Member Item 3 -->
+<div class="group p-3 rounded-2xl hover:bg-surface-container-low transition-all cursor-pointer border border-transparent hover:border-outline-variant/20">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Elena" class="w-12 h-12 rounded-2xl object-cover" data-alt="Portrait of an older woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuvTHvkzsQvDtSNSbBqYbrmCWvpwhkmq7g1Ew0mYbQJGTvnhlW2n-7IT7Jh8LcCeYzmh0nZEovHKPDamoQt8PZOl2ECJhOOUGXus7iviz6ixGo79nUwBu7XbR1_rZBvzyYHDMV-Ff6ih8i5Q3Yd90SSg1uTJfv4yZ6h56f939GsxXSPr_76z5ZBU1b-yjLPfMU4nF_0uzL-Zl_8bYbztJiKQqSurlf2ZntKw9vfnrHwHeAbZNks5KhJuUsmZXY_4ipszq7y6jQZk-F"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-primary border-2 border-white rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm text-on-surface">Elena (Mom)</h4>
+<span class="text-[10px] font-bold text-primary">SAFE</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Home</p>
+<div class="flex items-center gap-3 mt-1.5">
+<div class="flex items-center gap-1 text-[10px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">battery_charging_full</span> 98%
+                                    </div>
+<div class="flex items-center gap-1 text-[10px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 15m ago
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Member Item 4 -->
+<div class="group p-3 rounded-2xl hover:bg-surface-container-low transition-all cursor-pointer border border-transparent hover:border-outline-variant/20">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="David" class="w-12 h-12 rounded-2xl object-cover" data-alt="Portrait of a middle aged man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmQWfnvKe75L2dCTPb401D0ZBKox0pp9vL9xT0nfPCsrDU195O6aWGUibTQ8Q-tbOQlxpUcL0BGS_IBF8llmg5AEKLmPqBzUW8VXsh7nz-6GsoifU9IeBQiPpAshnF45PrdGiJy6AS3qsNCLVxFfvVbDCtxyIVT4MH-vpjJMeDu8WopqX_6_xziQS0kg7riGHPts9ToOO-nyqf9oJbEZ4K8YprcPO4T0hIjlEYGDEzOc3TpqBX4uD1U89hc5j4bk8q2s5VauC-v7Yt"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-primary border-2 border-white rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm text-on-surface">David (Dad)</h4>
+<span class="text-[10px] font-bold text-primary">SAFE</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">At Office</p>
+<div class="flex items-center gap-3 mt-1.5">
+<div class="flex items-center gap-1 text-[10px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">battery_5_bar</span> 61%
+                                    </div>
+<div class="flex items-center gap-1 text-[10px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Just now
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low/50">
+<button class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed border-outline-variant/30 text-on-surface-variant hover:text-primary hover:border-primary/30 transition-all font-semibold text-sm">
+<span class="material-symbols-outlined">settings_suggest</span> Network Settings
+                    </button>
+</div>
+</section>
+<!-- Center Content: Real-time Map -->
+<section class="flex-1 relative bg-surface-container-low overflow-hidden">
+<!-- Map Background Placeholder -->
+<div class="absolute inset-0 z-0">
+<img alt="Network Map" class="w-full h-full object-cover opacity-60 grayscale-[0.3]" data-alt="Clean minimalist city map top down view" data-location="San Francisco" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmcio-v9d6qc6I_ZnyHybT9rGWgVJKG1J2R5cI1iNqDoRmkY2pVm6Pk1KU6OLl4zdXn8eNuYAccOW495XLC6cGH778rYMXEi46SbIFE_eeLhmY6rxl2JzS6U8r3iMuuqNINi2za9TIZ45MrK8i9L5G4T7w0YhmVHPOVCG_ifLP7kXPX2KNmbZccEV6QojfNWslbHzUWg7Tqm8w53DFrKZawIwyoRkpzjt6VyUmk_FK6CUuVCSBG_WwmAWTlzSNHqr683z3LoxrD4Rx"/>
+<!-- SVG Overlay for Dotted Paths -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 1000 1000">
+<path d="M 450 450 Q 500 550 600 520" fill="none" opacity="0.4" stroke="#006b2c" stroke-dasharray="6 6" stroke-width="2"></path>
+<path d="M 200 300 L 250 350 L 320 330" fill="none" opacity="0.3" stroke="#006b2c" stroke-dasharray="6 6" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Map Controls -->
+<div class="absolute top-6 right-6 flex flex-col gap-2 z-20">
+<button class="bg-white/90 backdrop-blur shadow-xl p-2.5 rounded-xl hover:bg-white transition-all text-on-surface">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="bg-white/90 backdrop-blur shadow-xl p-2.5 rounded-xl hover:bg-white transition-all text-on-surface">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="bg-white/90 backdrop-blur shadow-xl p-2.5 rounded-xl hover:bg-white transition-all text-primary mt-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">my_location</span>
+</button>
+</div>
+<!-- Floating Stats Badge -->
+<div class="absolute top-6 left-6 z-20">
+<div class="bg-white/90 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-white/50 flex items-center gap-4">
+<div class="flex -space-x-2">
+<img alt="Sarah" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJT3cuF26yZeQB360MFLXf4Mk9brthb6pzYkG6bWghKo8uVgT4Wjxdj2bAyiOvV1VhwTdSAZ1ZJRETzEL0EJEWGbbpthW3YtEuaEXAhdm8BFWhed5PhKwx1cgxfJ7l__HYwbqgoYtL1STNbr67jkcZDvozJ5-pyXBUFHTQ3crGsxpLqd8IKwDttDqWEKuMYuAUkBV-MESjbVjKHiAYrm3WmTxVjCtzlH-c4nRoCM2UuFOzpXz-Dk9oe2pI5Np5W7oOjvGw6zyYw9yb"/>
+<img alt="Leo" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu5nj8ozyRfNBd6zCprMJ4fYFefDx-ERXyrGWvcakMci3_H93EUBsivAux9pc7zlw5EinBr0-zx_jCNznqqs-fz9s-ObHPNj_75IoThCtu1PFHwT85n7Ak6baUFlLnZzE0tH13XTG4sJGM4934i3ZPowZa9V2saxZ9X5IeoFLt69pAruszE8I5kWIZhGZyb4iYBczkm_nloxaa62giEvMj8EOBgWdR2CQQdkZL0ArKwRXVBmZXvpsOu3Jw9GLUODRKc0NvdhQUIjOh"/>
+<img alt="Elena" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwNF2gI4lnLb9pqq9_fYuORQ9Hn6NN9OAC-cU1ZVFQ107XLwmqiDydfNVEQq6LDuGhUsUI46BVRmueUrSN53m5lTuZ_ux991DSDxx2JKYfVO9q25pguVwGSFSyOiPUApxyOTckSED9oSo3tTs6qlZbsF8XcPyonMguVJV0bIp3z4axVk6_I6YGgnNf-P4Z97VFsAAJG9dKJ2ceYIHiT0EUA40ThxZbUlPuF9qdKAPjHfOfbCQa3684_dqWXHK4a5p0RNzkfo23ql0b"/>
+</div>
+<div class="h-8 w-px bg-outline-variant/30"></div>
+<div>
+<p class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant/60">Network Health</p>
+<p class="text-xs font-bold text-primary flex items-center gap-1">
+                                Optimal Connection <span class="material-symbols-outlined text-[14px]">wifi</span>
+</p>
+</div>
+</div>
+</div>
+<!-- Map Markers -->
+<!-- Leo Marker (Active Interaction State) -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 group">
+<div class="relative flex flex-col items-center">
+<!-- Tooltip Info Card -->
+<div class="mb-4 bg-white shadow-2xl rounded-2xl p-4 w-48 border border-outline-variant/20 transform transition-all scale-100 opacity-100">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-on-surface">Leo Mitchell</span>
+<span class="material-symbols-outlined text-tertiary text-sm">directions_car</span>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-[10px]">
+<span class="text-on-surface-variant">Status</span>
+<span class="font-bold text-tertiary">Moving • 12 mph</span>
+</div>
+<div class="flex justify-between text-[10px]">
+<span class="text-on-surface-variant">Last Seen</span>
+<span class="font-bold text-on-surface">24s ago</span>
+</div>
+</div>
+<button class="mt-3 w-full py-1.5 text-[10px] font-bold bg-primary-fixed text-on-primary-fixed-variant rounded-lg hover:bg-primary-fixed-dim transition-all">
+                                Send Alert Check
+                            </button>
+</div>
+<!-- Marker -->
+<div class="relative">
+<div class="absolute inset-0 bg-primary/20 animate-ping rounded-full"></div>
+<div class="relative w-12 h-12 rounded-full border-4 border-white shadow-2xl overflow-hidden ring-2 ring-primary ring-offset-2">
+<img alt="Leo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkQTWfXKxRdRenRM85hxkrVqYGkoJc5wrupsFHYoHIbJvWkg77l0l7TaQhaQVlPFlCOZ9xhEbJBpdZhUzSGmkBzJ0bbnFGDmLUHqkPK0cVQz5gLUNmDuYjp6cV5h_ZlDHRhOQNo4t3zHFNPpca_D17ezmC5pMNzagIJlmjjgv_tNPQU9Ui9QojtJwekDcAWMncsC5sdKtBfkNt1xjX3x39lwzrrfJyq4M35FeoNWRWhKbZ8XkZaEbyAzwo5SrviOHAddTWvViuEYDl"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-tertiary text-white p-1 rounded-full shadow-lg border border-white">
+<span class="material-symbols-outlined text-[12px] block">navigation</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sarah Marker -->
+<div class="absolute top-1/4 left-1/3 z-20">
+<div class="relative">
+<div class="w-10 h-10 rounded-full border-4 border-white shadow-xl overflow-hidden ring-2 ring-primary/40 ring-offset-2">
+<img alt="Sarah" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsN0zrXhyramjkdpYdPI8pnbPtna_oSnrNPjYRgeotVHfpGmLYfkC5oMFiyjP-pntxgF7tWVYW2z-QKq3DQxeXfbnylKF2LUPql2AJInsacq7YglOQLd-TYjhSnIjhjRcOPhfgvCWH3P6HPWmU9K0_NoZ1LUGAREtKdcJrZrjVgILnbCjFbaHZLCZdqmNDb4dbjSuX6heV5avF9vN06coUNJYgDBM5xauuoGkYcwYDJ6f5IcmKdRFJups7jWtVMzJ71g55DK4VUG-N"/>
+</div>
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur px-2 py-0.5 rounded-full shadow-md whitespace-nowrap border border-white">
+<span class="text-[10px] font-bold text-on-surface">Sarah • Library</span>
+</div>
+</div>
+</div>
+<!-- David Marker -->
+<div class="absolute bottom-1/4 right-1/4 z-20">
+<div class="relative">
+<div class="w-10 h-10 rounded-full border-4 border-white shadow-xl overflow-hidden ring-2 ring-primary/40 ring-offset-2">
+<img alt="David" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJzmJr-k8xWQDJbYgwqe9XjnzR3vJ80m0N6XkG5v9v4w9uLvGdhwJHR-1EZLjD-EUpexUHluGscjPsPelCn5IDrvynVVoBaxom5gXZqzQcFnYDSwoQkmqw883a6QxDgwK1Qz4w9md20DRUo8NEpFu_kSsAL52x65WOq_PBe5RL19vTchwgtgCOpSV6v_WPtKf3_iLrITS1EDrYqq_CImObZaFFq7LpRAs0g8bMqwcSyyRYgU7E9qbzKXs72kl0QQy52gjKpWu-FHkV"/>
+</div>
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur px-2 py-0.5 rounded-full shadow-md whitespace-nowrap border border-white">
+<span class="text-[10px] font-bold text-on-surface">David • Office</span>
+</div>
+</div>
+</div>
+<!-- Add Member Floating Action Button -->
+<button class="absolute bottom-8 right-8 flex items-center gap-3 px-6 py-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full shadow-2xl shadow-primary/40 hover:scale-105 active:scale-95 transition-all z-40 group">
+<span class="material-symbols-outlined font-bold group-hover:rotate-90 transition-transform">add</span>
+<span class="font-headline font-bold text-sm">Add Member</span>
+</button>
+</section>
+<!-- Right Panel: Activity & Alerts (Asymmetric layout) -->
+<section class="w-72 bg-surface p-6 flex flex-col gap-6 border-l-0">
+<div>
+<h3 class="font-headline font-bold text-sm uppercase tracking-widest text-on-surface-variant/60 mb-4">Safe Zones</h3>
+<div class="space-y-3">
+<div class="p-3 bg-surface-container-low rounded-xl border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-1">
+<span class="material-symbols-outlined text-primary text-lg">home</span>
+<span class="text-sm font-bold">Home</span>
+</div>
+<p class="text-[10px] text-on-surface-variant">Elena &amp; 2 others currently here</p>
+</div>
+<div class="p-3 bg-surface-container-low rounded-xl border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-1">
+<span class="material-symbols-outlined text-primary text-lg">school</span>
+<span class="text-sm font-bold">Central High</span>
+</div>
+<p class="text-[10px] text-on-surface-variant">No members active</p>
+</div>
+</div>
+</div>
+<div class="flex-1">
+<h3 class="font-headline font-bold text-sm uppercase tracking-widest text-on-surface-variant/60 mb-4">Recent Activity</h3>
+<div class="space-y-4">
+<div class="flex gap-3">
+<div class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5"></div>
+<div>
+<p class="text-xs font-bold text-on-surface">Sarah Mitchell reached Central Library</p>
+<p class="text-[10px] text-on-surface-variant">12 minutes ago</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary mt-1.5"></div>
+<div>
+<p class="text-xs font-bold text-on-surface">Leo Mitchell is on the move</p>
+<p class="text-[10px] text-on-surface-variant">3 minutes ago</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim mt-1.5"></div>
+<div>
+<p class="text-xs font-bold text-on-surface">David Mitchell started Guard Mode</p>
+<p class="text-[10px] text-on-surface-variant">1 hour ago</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Premium Upsell / Insight Card -->
+<div class="mt-auto p-4 bg-primary text-white rounded-2xl relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="font-headline font-bold text-sm mb-1">Weekly Safety Audit</h4>
+<p class="text-[10px] text-on-primary-container opacity-80 mb-3">Your family has stayed within 100% of designated safe zones this week.</p>
+<button class="text-[10px] font-bold underline underline-offset-4">View Report</button>
+</div>
+<!-- Abstract Background Pattern -->
+<div class="absolute -right-4 -bottom-4 opacity-20">
+<span class="material-symbols-outlined text-6xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>
