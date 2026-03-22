@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node --watch src/index.js",
     "start": "node src/index.js",
+    "build": "npm rebuild sharp",
     "seed": "node src/utils/seedData.js",
     "seed:zones": "node src/utils/seedSafetyZones.js"
   },
@@ -26,6 +27,7 @@
     "jsonwebtoken": "^9.0.3",
     "morgan": "^1.10.1",
     "sharp": "^0.34.5",
+    "@img/sharp-linux-x64": "^0.34.5",
     "socket.io": "^4.8.3"
   }
 }
